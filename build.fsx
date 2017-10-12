@@ -13,7 +13,7 @@ open Fake.DocFxHelper
 let configuration = "Release"
 
 // Directories
-let output = __SOURCE_DIRECTORY__  @@ "build"
+let output = __SOURCE_DIRECTORY__  @@ "bin"
 let outputTests = output @@ "tests"
 let outputBinaries = output @@ "binaries"
 let outputNuGet = output @@ "nuget"
@@ -70,7 +70,7 @@ Target "CleanTests" <| fun _ ->
 
 open Fake.Testing
 Target "RunTests" <| fun _ ->  
-    let xunitTestAssemblies = !! "src/**/bin/Release/Akka.DI.Ninject.Tests.dll"
+    let xunitTestAssemblies = !! "src/**/bin/Release/**/Akka.DI.Ninject.Tests.dll"
 
     CreateDir outputTests
 
