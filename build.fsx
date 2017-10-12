@@ -36,11 +36,16 @@ Target "Clean" (fun _ ->
 )
 
 Target "RestorePackages" (fun _ ->
-    DotNetCli.Restore
-        (fun p -> 
-            { p with
-                Project = "./src/Akka.DI.Ninject.sln"
-                NoCache = false })
+    let projects = !! "./src/**/**.csproj"
+    
+    let runSingleProject project =
+        DotNetCli.Restore
+            (fun p -> 
+                { p with
+                    Project = project
+                    NoCache = false })
+
+    projects |> Seq.iter (runSingleProject)    
 )
 
 Target "Build" (fun _ ->
