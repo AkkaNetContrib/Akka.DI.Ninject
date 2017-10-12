@@ -69,12 +69,10 @@ Target "RunTests" <| fun _ ->
 
     CreateDir outputTests
 
-    let xunitToolPath = findToolInSubPath "xunit.console.exe" "src/packages/xunit.runner.console*/tools"
-    printfn "Using XUnit runner: %s" xunitToolPath
     let runSingleAssembly assembly =
         let assemblyName = Path.GetFileNameWithoutExtension(assembly)
         xUnit2
-            (fun p -> { p with XmlOutputPath = Some (outputTests + @"\" + assemblyName + "_xunit.xml"); HtmlOutputPath = Some (outputTests + @"\" + assemblyName + "_xunit.HTML"); ToolPath = xunitToolPath; TimeOut = System.TimeSpan.FromMinutes 30.0; Parallel = ParallelMode.NoParallelization }) 
+            (fun p -> { p with XmlOutputPath = Some (outputTests + @"\" + assemblyName + "_xunit.xml"); HtmlOutputPath = Some (outputTests + @"\" + assemblyName + "_xunit.HTML"); TimeOut = System.TimeSpan.FromMinutes 10.0; Parallel = ParallelMode.NoParallelization }) 
             (Seq.singleton assembly)
 
     xunitTestAssemblies |> Seq.iter (runSingleAssembly)
@@ -202,7 +200,7 @@ Target "Nuget" DoNothing
 "Clean" ==> "RestorePackages" ==> "Build" ==> "BuildRelease"
 
 // tests dependencies
-"Clean" ==> "RestorePackages" ==> "RunTests"
+"Clean" ==> "RestorePackages" ==> "Build" ==> "RunTests"
 
 // nuget dependencies
 "Clean" ==> "RestorePackages" ==> "Build" ==> "CreateNuget"
