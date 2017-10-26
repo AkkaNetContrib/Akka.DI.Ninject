@@ -14,7 +14,7 @@ let configuration = "Release"
 
 // Directories
 let output = __SOURCE_DIRECTORY__  @@ "bin"
-let outputTests = output @@ "tests"
+let outputTests = output @@ "TestResults"
 let outputBinaries = output @@ "binaries"
 let outputNuGet = output @@ "nuget"
 
