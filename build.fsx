@@ -14,7 +14,7 @@ let configuration = "Release"
 
 // Directories
 let output = __SOURCE_DIRECTORY__  @@ "bin"
-let outputTests = output @@ "tests"
+let outputTests = output @@ "TestResults"
 let outputBinaries = output @@ "binaries"
 let outputNuGet = output @@ "nuget"
 
@@ -209,6 +209,7 @@ Target "Nuget" DoNothing
 
 // nuget dependencies
 "Clean" ==> "RestorePackages" ==> "Build" ==> "CreateNuget"
+"CreateNuget" ==> "PublishNuget" ==> "Nuget"
 
 // all
 Target "All" DoNothing
