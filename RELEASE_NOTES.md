@@ -1,3 +1,6 @@
+#### 1.3.1 October 31 2017 ####
+Support for Akka.NET 1.3.1 
+
 #### 1.1.1 August 10 2016 ####
 Support for Akka.NET 1.1.1
 
